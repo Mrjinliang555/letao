@@ -1,15 +1,15 @@
-/**
- * Created by toshiba on 2018/4/6.
- */
-//$.ajax({
-//  url: "/employee/checkRootLogin",
-//  success: function(info){
-//    console.log(info);
-//    if( info.error ){
-//      location.href = "login.html"
-//    }
-//  }
-//})
+if( location.href.indexOf("login.html") == -1 ){
+  console.log(1);
+  $.ajax({
+    url: "/employee/checkRootLogin",
+    success: function(info){
+      console.log(info);
+      if( info.error ){
+        location.href = "login.html"
+      }
+    }
+  })
+}
 //nprogress 事件设置
 $(function(){
 

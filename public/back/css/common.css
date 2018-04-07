@@ -122,6 +122,13 @@ ul,ol {
   padding: 20px 15px;
 }
 
+.barBox,.pieBox {
+  width: 48%;
+  height: 400px;
+}
+
 /*内容区结束*/
+
+
 
 /*模态框*/

@@ -21,7 +21,7 @@
       <p>超级管理员</p>
     </div>
     <ul class="lt_nav">
-      <li><a href="#" class="current"><i class="glyphicon glyphicon-user"></i><span>用户管理</span></a></li>
+      <li><a href="#"><i class="glyphicon glyphicon-user"></i><span>用户管理</span></a></li>
       <li><a href="javascript:;" class="classify"><i class="glyphicon glyphicon-list"></i><span>分类管理</span></a>
         <div class="sm_nav" style="display: none">
           <a href="#" class="first">一级分类</a>
@@ -42,6 +42,8 @@
         <li><a href="index.html">管理系统</a></li>
         <li class="active">首页</li>
       </ol>
+      <div class="barBox pull-left"></div>
+      <div class="pieBox pull-right"></div>
     </div>
   </div>
 
@@ -67,21 +69,12 @@
     </div>
 
 <script src="lib/jquery/jquery.js"></script>
-    <script>
-      $.ajax({
-        url: "/employee/checkRootLogin",
-        success: function(info){
-          console.log(info);
-          if( info.error ){
-            location.href = "login.html"
-          }
-        }
-      })
-    </script>
 <script src="lib/bootstrap/js/bootstrap.js"></script>
 <script src="lib/bootstrap-validator/js/bootstrapValidator.js"></script>
 <script src="lib/nprogress/nprogress.js"></script>
+<script src="lib/echarts/echarts.min.js"></script>
 <script src="js/common.js"></script>
+<script src="js/index.js"></script>
 
 </body>
 </html>
