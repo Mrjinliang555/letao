@@ -1,9 +1,9 @@
 if( location.href.indexOf("login.html") == -1 ){
-  console.log(1);
+  //console.log(1);
   $.ajax({
     url: "/employee/checkRootLogin",
     success: function(info){
-      console.log(info);
+      //console.log(info);
       if( info.error ){
         location.href = "login.html"
       }
