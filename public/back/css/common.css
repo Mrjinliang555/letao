@@ -133,6 +133,9 @@ th,td {
 .table.table-bordered td {
   vertical-align: middle;
 }
+.mb_20 {
+  margin-bottom: 20px;
+}
 
 /*内容区结束*/
 

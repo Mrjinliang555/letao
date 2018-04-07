@@ -10,6 +10,25 @@ $(function(){
 
   render();
 
+  //点击禁用切换
+  $(".main_content tbody").on("click",".btn",function(){
+    var id = $(this).parent().data("id");
+    //反着来
+    var isDelete = $(this).hasClass("btn-danger")?0:1;
+    //console.log(isDelete);
+    $.ajax({
+        url: "/user/updateUser",
+        type: "post",
+        data:{id:id,isDelete:isDelete},
+        success: function(info){
+          //console.log(info);
+          if( info.success ){
+            render();
+          }
+        }
+    })
+  })
+
 
   //数据渲染
   function render(){
@@ -17,7 +36,7 @@ $(function(){
       url: "/user/queryUser",
       data: {page:currentPage,pageSize:pageSize},
       success: function(info){
-        console.log(info);
+        //console.log(info);
 
         $(".main_content tbody").html( template("userTpl",info) );
 

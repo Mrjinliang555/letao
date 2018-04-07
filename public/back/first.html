@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>登录</title>
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="lib/bootstrap-validator/css/bootstrapValidator.css">
+  <link rel="stylesheet" href="lib/nprogress/nprogress.css">
+  <link rel="stylesheet" href="css/common.css">
+</head>
+
+<body>
+
+<!--侧边栏-->
+<div class="lt_aside">
+  <div class="brand">
+    <h3>黑马19期哦</h3>
+  </div>
+  <div class="user">
+    <img src="images/cc.jpg" alt="">
+    <p>超级管理员</p>
+  </div>
+  <ul class="lt_nav">
+    <li><a href="user.html"><i class="glyphicon glyphicon-user"></i><span>用户管理</span></a></li>
+    <li><a href="javascript:;" class="classify"><i class="glyphicon glyphicon-list"></i><span>分类管理</span></a>
+      <div class="sm_nav">
+        <a href="first.html" class="first current">一级分类</a>
+        <a href="second.html" class="second">二级分类</a>
+      </div>
+    </li>
+    <li><a href="product.html"><i class="glyphicon glyphicon-tags"></i><span>商品管理</span></a></li>
+  </ul>
+</div>
+
+<div class="lt_main">
+  <div class="main_top">
+    <a href="#" class="pull-left menu_btn"><i class="glyphicon glyphicon-align-justify"></i></a>
+    <a href="#" class="pull-right logout_btn"><i class="glyphicon glyphicon-log-out"></i></a>
+  </div>
+  <div class="main_content">
+    <!--路径导航-->
+    <ol class="breadcrumb">
+      <li><a href="index.html">管理系统</a></li>
+      <li class="active">分类管理</li>
+      <li class="active">一级分类</li>
+    </ol>
+    <!--添加分类-->
+    <button class="btn btn-default mb_20" id="addCategory">添加分类</button>
+    <!--数据表-->
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th width="20%">序号</th>
+          <th width="80%">一级分类名</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--挖个坑-->
+      </tbody>
+    </table>
+    <!--分页框-->
+    <div class="pageBox pull-right">
+      <ul id="pagintor"></ul>
+    </div>
+  </div>
+</div>
+
+<!--模态框-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" >
+          <span >&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">
+          温馨提示</h4>
+      </div>
+      <div class="modal-body">
+        <p class="red"><i class="glyphicon glyphicon-info-sign"></i>您确定要退出后台管理系统吗？</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary btn_logout">退出</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--添加分类模态框-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" >
+          <span >&times;</span></button>
+        <h4 class="modal-title" id="myAddModalLabel">
+          添加分类</h4>
+      </div>
+      <div class="modal-body">
+        <form id="form">
+          <div class="form-group">
+            <input type="text"
+                   class="form-control"
+                   name="categoryName"
+                   placeholder="请输入一级分类">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary" form="form">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="lib/jquery/jquery.js"></script>
+<script src="lib/bootstrap/js/bootstrap.js"></script>
+<script src="lib/bootstrap-validator/js/bootstrapValidator.js"></script>
+<script src="lib/artTemplate/template-web.js"></script>
+<script src="lib/nprogress/nprogress.js"></script>
+<script src="lib/echarts/echarts.min.js"></script>
+<script src="lib/bootstrap-paginator/bootstrap-paginator.js"></script>
+<script src="js/common.js"></script>
+<script src="js/first.js"></script>
+
+<script type="text/html" id="firstTpl">
+{{each rows v i}}
+  <tr>
+    <td>{{ (page-1)*size + i + 1 }}</td>
+    <td>{{ v.categoryName }}</td>
+  </tr>
+{{/each}}
+</script>
+
+</body>
+</html>

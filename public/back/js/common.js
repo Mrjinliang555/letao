@@ -45,7 +45,7 @@ $(".main_top").toggleClass("tohidden");
 //退出登录
 $(".logout_btn").click(function(){
 
-  $('#myModal').modal();
+  $('#myModal').modal("show");
 
 })
 $(".btn_logout").click(function(){
