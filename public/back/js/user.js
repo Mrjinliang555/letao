@@ -12,10 +12,20 @@ $(function(){
 
   //点击禁用切换
   $(".main_content tbody").on("click",".btn",function(){
+    $("#sureModal").modal("show");
     var id = $(this).parent().data("id");
     //反着来
     var isDelete = $(this).hasClass("btn-danger")?0:1;
+    $(".sureBtn").data("id",id).data("isDelete",isDelete);
     //console.log(isDelete);
+
+  })
+
+  //发送ajax修改
+  $(".sureBtn").click(function(){
+    var id = $(this).data("id");
+    var isDelete = $(this).data("isDelete");
+    console.log(id, isDelete);
     $.ajax({
         url: "/user/updateUser",
         type: "post",
@@ -23,6 +33,7 @@ $(function(){
         success: function(info){
           //console.log(info);
           if( info.success ){
+            $("#sureModal").modal("hide");
             render();
           }
         }
