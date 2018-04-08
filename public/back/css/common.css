@@ -136,6 +136,9 @@ th,td {
 .mb_20 {
   margin-bottom: 20px;
 }
+.form-control {
+  resize: none;
+}
 
 /*内容区结束*/
 
