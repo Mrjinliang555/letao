@@ -7,10 +7,37 @@ $(function(){
   //设置每页条数
   var pageSzie = 4;
   //设置图片默认下标 （一共有三张图）
-  var imgNum = 0;
+  var imgNum = 2;
+  //设置图片容器
+  var picArr = [];
 
   //渲染商品列表
   render();
+
+
+  //切换上下架
+  $(".main_content tbody").on("click",".upDown",function(){
+    var id = $(this).parent().data("id");
+    var statu = $(this).data("statu");
+    $("#myUpdateModal").modal("show");
+    //console.log(statu);
+    $(".updateBtn").off("click").on("click",function(){
+      $.ajax({
+        url: "http://localhost/sql/updateProduct.php",
+        data: {id:id,statu:statu},
+        dataType: "jsonp",
+        success: function(info){
+          //console.log(info);
+          if( info.success ){
+            $("#myUpdateModal").modal("hide");
+            render();
+          }
+        }
+      })
+
+    })
+
+  })
 
   //显示模态框
   $("#addProduct").click(function(){
@@ -19,7 +46,7 @@ $(function(){
       url: "/category/querySecondCategoryPaging",
       data: {page: 1, pageSize: 100},
       success: function(info){
-        console.log(info);
+        //console.log(info);
         $(".dropdown-menu").html(template("secondTpl",info))
       }
     })
@@ -29,7 +56,7 @@ $(function(){
   $(".dropdown-menu").on("click","a",function(){
     var txt = $(this).text();
     var id = $(this).data("id");
-    console.log(id);
+    //console.log(id);
     $("#dropdownNm").text(txt);
     $("[name='brandId']").val(id);
     $("#form").data("bootstrapValidator").updateStatus("brandId","VALID");
@@ -42,15 +69,16 @@ $(function(){
     //e：事件对象
     //data：图片上传后的对象，通过e.result.picAddr可以获取上传后的图片地址
     done:function (e, data) {
-      console.log(data);
-      var url = data.result.picAddr;
-      var imgNm = data.result.picName
-      $(".imgBox img")[imgNum].src = url;
-      $(".picAddrBox input")[imgNum].value = url;
-      $(".picNameBox input")[imgNum].value = imgNm;
-      imgNum++;
-      if( imgNum >= 3){
-        imgNum = 0;
+      var info = data.result;
+      //console.log(info);
+      picArr.unshift(info);
+      $(".imgBox").prepend("<img src='"+info.picAddr+"' />");
+      if( picArr.length > 3 ){
+        picArr.pop();
+        $(".imgBox img").last().remove();
+      }
+      if( picArr.length >= 3 ){
+        $("#form").data("bootstrapValidator").updateStatus("imgUpload","VALID");
       }
     }
   });
@@ -100,101 +128,67 @@ $(function(){
       proName: {
         validators: {
           notEmpty: {
-            message: "不能为空"
+            message: "请输入商品名称"
           }
         }
       },
       oldPrice: {
         validators: {
           notEmpty: {
-            message: "不能为空"
+            message: "请输入商品原价"
           }
         }
       },
       price: {
         validators: {
           notEmpty: {
-            message: "不能为空"
+            message: "请输入商品价格"
           }
         }
       },
       proDesc: {
         validators: {
           notEmpty: {
-            message: "不能为空"
+            message: "请输入商品描述"
           }
         }
       },
       size: {
         validators: {
           notEmpty: {
-            message: "不能为空"
-          }
-        }
-      },
-      statu: {
-        validators: {
-          notEmpty: {
-            message: "不能为空"
+            message: "请输入商品的尺码"
+          },
+          regexp: {
+            regexp: /^[34]\d-\d{2}$/,
+            message: '请输入正确的尺码格式：(32-46)'
           }
         }
       },
       num: {
         validators: {
           notEmpty: {
-            message: "不能为空"
+            message: "请输入商品库存"
+          },
+          regexp: {
+            regexp: /^[1-9]\d*$/,
+            message: '请输入非零开头的数值'
           }
         }
       },
       brandId: {
         validators: {
           notEmpty: {
-            message: "不能为空"
+            message: "请选择商品归属品牌"
           }
         }
       },
-    //  picName1: {
-    //    validators: {
-    //      notEmpty: {
-    //        message: "不能为空"
-    //      }
-    //    }
-    //  },
-    //  picAddr1: {
-    //    validators: {
-    //      notEmpty: {
-    //        message: "不能为空"
-    //      }
-    //    }
-    //  },
-    //  picName2: {
-    //    validators: {
-    //      notEmpty: {
-    //        message: "不能为空"
-    //      }
-    //    }
-    //  },
-    //  picAddr2: {
-    //    validators: {
-    //      notEmpty: {
-    //        message: "不能为空"
-    //      }
-    //    }
-    //  },
-    //  picName3: {
-    //    validators: {
-    //      notEmpty: {
-    //        message: "不能为空"
-    //      }
-    //    }
-    //  },
-    //  picAddr3: {
-    //    validators: {
-    //      notEmpty: {
-    //        message: "不能为空"
-    //      }
-    //    }
-    //  }
+      imgUpload: {
+        validators: {
+          notEmpty: {
+            message: "请上传三张图片"
+          }
+        }
+      }
     },
   })
 
@@ -203,38 +197,27 @@ $(function(){
     e.preventDefault();
     //使用ajax提交逻辑
     var info = $("#form").serialize();
-    console.log(info);
+    info += "&picName1="+picArr[0].picName+"&picAddr1="+picArr[0].picAddr;
+    info += "&picName2="+picArr[1].picName+"&picAddr2="+picArr[1].picAddr;
+    info += "&picName3="+picArr[2].picName+"&picAddr3="+picArr[2].picAddr;
+    //console.log(info);
+    //console.log(picArr);
     $.ajax({
       url: "/product/addProduct",
       type: "post",
       data: info,
       success: function(info){
-        console.log(info);
-        currentPage = 1;
-        render();
-        $("#form").data("bootstrapValidator").resetForm(true);
-        $(".imgBox img").attr("src","");
-        $("#dropdownNm").text("请选择二级分类");
+        //console.log(info);
+        if(info.success){
+          currentPage = 1;
+          render();
+          $("#form").data("bootstrapValidator").resetForm(true);
+          $(".imgBox img").remove();
+          $("#dropdownNm").text("请选择二级分类");
+          $("#addModal").modal("hide");
+        }
       }
     })
   });
 
-  //var myJsonP = {
-  //  callback: null,
-  //  send: function(){
-  //    var time = new Date() / 1;
-  //    var back = "callback" + time;
-  //    var htmlStr= "function "+back+"(info){console.log(info)}"
-  //    var script1 = document.createElement("script");
-  //    script1.innerHTML = htmlStr;
-  //    $(script1).appendTo("body");
-  //    var data = url+"?callback="+back;
-  //    var script = document.createElement("script");
-  //    script.src= data;
-  //    $(script).appendTo("body");
-  //    $(script).remove();
-  //  }
-  //}
-
-  //跨域函数 jsonpCallback
 })

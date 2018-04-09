@@ -139,6 +139,9 @@ th,td {
 .form-control {
   resize: none;
 }
+.imgBox img {
+  width: 100px;
+}
 
 /*内容区结束*/
 
