@@ -1,0 +1,52 @@
+.lt_footer {
+  background-color: #EFEFF4;
+  border-top: 1px solid red;
+  line-height: 55px;
+  padding-left: 20px;
+}
+.lt_footer .txt {
+  float: left;
+}
+.lt_footer .btns {
+  float: right;
+  height: 55px;
+  line-height: 55px;
+  padding-right: 10px;
+}
+.lt_footer .btns button {
+  vertical-align: middle;
+}
+.lt_main .item {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.lt_main .item h3 {
+  font-size: 18px;
+  line-height: 25px;
+}
+.lt_main .title {
+  border-top: 1px solid #ccc;
+}
+.lt_main .price span {
+  color: red;
+}
+.lt_main .price .old {
+  font-size: 12px;
+  color: #666;
+  text-decoration: line-through;
+}
+.lt_main .size span {
+  padding: 5px;
+  font-size: 12px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  margin-left: 5px;
+  line-height: 30px;
+}
+.lt_main .num span {
+  font-size: 12px;
+  color: #666;
+}
+.lt_main .size span.active {
+  background-color: deepskyblue;
+}

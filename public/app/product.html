@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>乐淘商城</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="lib/mui/css/mui.css">
+  <link rel="stylesheet" href="lib/fa/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/product.css">
+</head>
+<body>
+<!--版心容器-->
+<div class="lt_container">
+  <!--头部区域-->
+  <div class="lt_header">
+    <a href="javascript:history.go(-1);" class="icon-left">
+      <i class="mui-icon mui-icon-back"></i></a>
+    <h3>商品详情</h3>
+    <a href="javascript:location.reload()" class="icon-right">
+      <i class="mui-icon mui-icon-reload"></i></a>
+  </div>
+  <!--内容区域-->
+  <div class="lt_main">
+    <div class="mui-scroll-wrapper">
+      <div class="mui-scroll">
+
+        <div class="mui-slider">
+          <div class="mui-slider-group mui-slider-loop">
+            <!--挖个坑-->
+          </div>
+          <div class="mui-slider-indicator">
+
+            <!--挖个坑-->
+          </div>
+        </div>
+
+        <div class="info">
+            <!--挖个坑-->
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--底部区域-->
+  <div class="lt_footer">
+    <div class="txt"><a href="#">去购物车</a></div>
+    <div class="btns">
+      <button class="mui-btn mui-badge-red">加入购物车</button>
+      <button class="mui-btn mui-btn-warning">立即购买</button>
+    </div>
+  </div>
+</div>
+
+<script src="lib/mui/js/mui.min.js"></script>
+<script src="lib/artTemplate/template-web.js"></script>
+<script src="lib/zepto/zepto.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/product.js"></script>
+
+<!--准备模板-->
+
+<script type="text/html" id="imgTpl">
+  <div class="mui-slider-item mui-slider-item-duplicate">
+    <a href="#"><img src="{{pic[pic.length-1]?pic[pic.length-1].picAddr:'images/none.png'}}" /></a>
+  </div>
+  {{each pic v i}}
+  <div class="mui-slider-item">
+    <a href="#"><img src="{{v.picAddr}}" /></a>
+  </div>
+  {{/each}}
+  <div class="mui-slider-item mui-slider-item-duplicate">
+    <a href="#"><img src="{{pic[0]?pic[0].picAddr:'images/none.png'}}" /></a>
+  </div>
+</script>
+
+<script type="text/html" id="scroeTpl">
+  {{each pic v i}}
+  <div class="mui-indicator {{i == 0 ? 'mui-active' : ''}}"></div>
+  {{/each}}
+</script>
+
+<script type="text/html" id="infoTpl">
+  <div class="item title">
+    <h3>{{proName}}</h3>
+  </div>
+  <div class="item price">
+    价格 ：<span>￥{{oldPrice}}</span><span class="old">￥{{price}}</span>
+  </div>
+  <div class="item size">
+    尺码 ：{{each sizeArr v i}}
+    <span>{{v}}</span>
+    {{/each}}
+  </div>
+  <div class="item num">
+      数量 ：<div class="mui-numbox" data-numbox-step="1" data-numbox-min="1" data-numbox-max="{{num}}">
+      <button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+      <input class="mui-numbox-input" type="number" value="1">
+      <button class="mui-btn mui-numbox-btn-plus" type="button" disabled="">+</button>
+    </div>
+    <span>剩余数量：20双</span>
+  </div>
+  <div class="item">
+    数量 ：<span>{{proDesc}}</span>
+  </div>
+</script>
+
+</body>
+</html>

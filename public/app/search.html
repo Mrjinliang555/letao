@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>乐淘商城</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="lib/mui/css/mui.css">
+  <link rel="stylesheet" href="lib/fa/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/search.css">
+</head>
+<body>
+<!--版心容器-->
+<div class="lt_container">
+  <!--头部区域-->
+  <div class="lt_header">
+    <a href="javascript:history.go(-1);" class="icon-left">
+      <i class="mui-icon mui-icon-back"></i></a>
+    <h3>搜索中心</h3>
+  </div>
+  <!--内容区域-->
+  <div class="lt_main">
+    <div class="mui-scroll-wrapper">
+      <div class="mui-scroll">
+
+          <div class="lt_search">
+            <div class="right">
+              <button class="mui-btn mui-btn-primary">搜索</button>
+            </div>
+            <div class="left">
+              <input type="text" placeholder="请输入搜索关键字">
+            </div>
+          </div>
+          <div class="le_history">
+            <!--挖个坑-->
+
+          </div>
+
+      </div>
+    </div>
+  </div>
+  <!--底部区域-->
+  <div class="lt_footer">
+    <ul class="mui-clearfix">
+      <li class="current">
+        <a href="index.html">
+          <i class="fa fa-home"></i>
+          <p>首页</p>
+        </a>
+      </li>
+      <li>
+        <a href="category.html">
+          <i class="fa fa-bars"></i>
+          <p>分类页</p>
+        </a>
+      </li>
+      <li>
+        <a href="fa fa-shopping-cart">
+          <i class="fa fa-home"></i>
+          <p>购物车</p>
+        </a>
+      </li>
+      <li>
+        <a href="user.html">
+          <i class="fa fa-user"></i>
+          <p>用户中心</p>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script src="lib/mui/js/mui.min.js"></script>
+<script src="lib/artTemplate/template-web.js"></script>
+<script src="lib/zepto/zepto.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/search.js"></script>
+
+<!--准备模板-->
+<script type="text/html" id="historyTpl">
+  <div class="history_text mui-clearfix">
+    <a class="left" href="javascript:;">搜索历史</a>
+    <a id="delBtn" class="right" href="javascript:;">
+      <i class="fa fa-trash"></i>清空历史
+    </a>
+  </div>
+  <ul class="history_content">
+    {{each rows v i}}
+      <li>
+        <a class="historyBtn" href="javascript:;">
+          <span>{{v}}</span>
+          <i class="fa fa-times closeBtn"></i>
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+</script>
+
+</body>
+</html>
